@@ -1,12 +1,8 @@
 # Purpose and Learning Approach
-This repository consists of a collection of *systematic* study and *implementation of deep learning and machine learning algorithms* from **scratch**. My goal is to elaborately **document** the concepts I've studied throughout the course of learning Machine learning and Deep learning algorithms, so it serves as a well structured refrence for reviewing the concepts. The repository may also be helpful for those who are learning ML and DL *independently*. My approach is to develop a deeper understanding of the core **mathematical fundamentals** of the concept by studying the mathematical formulas underlying the algorithms and implementing them on my own. Furtheron I practice using established tools and libraries. This repository contains *theoretical description*, *mathematical foundations*, and *from scratch implementations* of the concepts I have studied.
+This repository consists of a collection of *systematic* study and *implementation of deep learning and machine learning algorithms* from **scratch**. My goal is to elaborately **document** the concepts I've studied throughout the course of learning Machine learning and Deep learning algorithms, so it serves as a well structured refrence for reviewing the concepts. The repository may also be helpful for those who are learning ML and DL *independently*. My approach is to develop a deeper understanding of the core **mathematical fundamentals** of the concept by studying the mathematical formulas underlying the algorithms and implementing them on my own. Moreover, I practice using established tools and libraries. This repository contains *theoretical description*, *mathematical foundations*, and *from scratch implementations* of the concepts I have studied.
 
-# Deep Learning
-Deep Learning is the method of creating a network of elements responsible for processing the data, and  making adjustments in the elements based on the result of the output evaluation. In simpler terms, deep learning is a method that teaches a computer certain behaviors.
-Deep Learning algorithms can be traced back to 1940s and even before that, there were ideas of such computational methods in 1800s. However, the first trainable neural network structure, close to what we have today, was **the Perceptron** which consists of only one layer of nodes with adjustable weights between the input and output layer.
-
-## What is a **Neural Network**?
-In deep learning, the proposed structures include multiple layers where each layer is composed of many nodes. Each node performs certain calculations on the input data and returns the result as an output. Consider a network of processing units; When the input enters each unit, it gets altered and passed on to the next layer as an input. This process repeats until the data reaches the end of the network. Now in case the output of the network isn's pleasant enough with what it should've been, the algorithm adjusts the particles of the units and tries again.
+# Machine Learning
+Machine learning is one the well known algorithms used in *artificial intelligence* that enables computer's ability to learn from a set of data. Furthermore, the system can make desicions and even predictions on formerly unseen data. This approach provides an opportunity to avoid explicitly writing down every necessary rule required for solving a problem by learning the patterns and relationships among the instances gathered from similar situations. Thus, it is cosidered to be a considerably efficient method.
 
 ## Different types of Learning
 We can categorize *Machine learning* and *Deep learning* systems based on the foundation of what they're used for. Mainly three categories define the characteristics of a system; Level of *supervision* in training, *incremental learning* capability, and whether it's *model-based* or *comparison-based*.
@@ -46,6 +42,14 @@ In this method, the model tries comparing new instances with the flagged ones. T
 
 ### Model-Based Learning
 Using a model-based learning system, we define the type of algorithm best fit to the problem in hand. Then, after cleaning and preparing the data, we start the training. The model finds a trend in the data, then based on the input, generates the most probable output. If the data quality is good and the model is trained well, the output will be closer to the desired result.
-## Refrences
+
+# Deep Learning
+Deep Learning is the method of creating a network of elements responsible for processing the data, and  making adjustments in the elements based on the result of the output evaluation. In simpler terms, deep learning is a method that teaches a computer certain behaviors.
+Deep Learning algorithms can be traced back to 1940s and even before that, there were ideas of such computational methods in 1800s. However, the first trainable neural network structure, close to what we have today, was **the Perceptron** which consists of only one layer of nodes with adjustable weights between the input and output layer.
+
+## What is a **Neural Network**?
+In deep learning, the proposed structures include multiple layers where each layer is composed of many nodes. Each node performs certain calculations on the input data and returns the result as an output. Consider a network of processing units; When the input enters each unit, it gets altered and passed on to the next layer as an input. This process repeats until the data reaches the end of the network. Now in case the output of the network isn's pleasant enough with what it should've been, the algorithm adjusts the particles of the units and tries again.
+
+## References
 - Andrew NG Machine Learning and Deep Learning Courses
 - Hands-On Machine Learning with Scikit-Learn, Kera & TensorFlow by Aurélien Géron
