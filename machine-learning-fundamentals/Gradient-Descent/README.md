@@ -49,9 +49,9 @@ The derivative part determines the direction in which the parameter must be upda
 
 ### Logistic Regression Cost Function derivative
 
-$\frac{d}{dw_j}$ J(w,b = $\frac{1}{m}$ $\sum_{i=1}^{m}$ ($f_{w,b}(x^{i}) - y^{i}$) $x_{j}^{(i)}$
+$\frac{d}{dw_j}$ J(w,b) = $\frac{1}{m}$ $\sum_{i=1}^{m}$ ($f_{w,b}(x^{i}) - y^{i}$) $x_{j}^{(i)}$
 
-$\frac{d}{db_j}$ J(w,b = $\frac{1}{m}$ $\sum_{i=1}^{m}$ ($f_{w,b}(x^{i}) - y^{i}$)
+$\frac{d}{db_j}$ J(w,b) = $\frac{1}{m}$ $\sum_{i=1}^{m}$ ($f_{w,b}(x^{i}) - y^{i}$)
 
 ## Pseudo code of GD
 ```
