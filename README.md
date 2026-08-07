@@ -51,5 +51,15 @@ Deep Learning algorithms can be traced back to 1940s and even before that, there
 In deep learning, the proposed structures include multiple layers where each layer is composed of many nodes. Each node performs certain calculations on the input data and returns the result as an output. Consider a network of processing units; When the input enters each unit, it gets altered and passed on to the next layer as an input. This process repeats until the data reaches the end of the network. Now in case the output of the network isn's pleasant enough with what it should've been, the algorithm adjusts the particles of the units and tries again.
 
 ## References
-- Andrew NG Machine Learning and Deep Learning Courses
-- Hands-On Machine Learning with Scikit-Learn, Kera & TensorFlow by Aurélien Géron
+
+1. Andrew Ng. **Machine Learning Specialization**. DeepLearning.AI and Stanford Online, Coursera.
+2. Andrew Ng. **Deep Learning Specialization**. DeepLearning.AI, Coursera.
+3. Mike X Cohen. *Practical Linear Algebra: A Hands-On Introduction for Data Science*. O'Reilly Media, 2022.
+4. Khan Academy. **Linear Algebra**.
+5. Kaggle Learn. **Intro to Machine Learning**.
+6. Kaggle Learn. **Intermediate Machine Learning**.
+7. Kaggle Learn. **Intro to Deep Learning**.
+8. Kaggle Learn. **Data Visualization**.
+9. TensorFlow Documentation.
+10. NumPy Documentation.
+11. Matplotlib Documentation.
