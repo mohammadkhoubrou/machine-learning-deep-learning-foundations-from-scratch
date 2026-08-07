@@ -16,3 +16,9 @@ The concepts in this section are studied through mathematical explanations, from
 Whenever appropriate, concepts are first implemented from **scratch** using **basic numerical tools** in order to understand the mathematical operations underlying the algorithms. Established machine learning **libraries** are then used to explore how these concepts are implemented in practical workflows.
 
 The purpose of this approach is to understand not only **how** to use a machine learning algorithm, but also **why and how it works**.
+
+## References
+1. Andrew Ng. **Machine Learning Specialization**. DeepLearning.AI and Stanford Online, Coursera.
+2. **Kaggle Learn.** *Intro to Machine Learning*.
+3. **Kaggle Learn.** *Intermediate Machine Learning*.
+4. Kaggle Learn. **Data Visualization**.
