@@ -22,3 +22,20 @@ Turns out a neural network could meet the needs of the users and developers in d
 - Machine translators.</br>
 
 For each algorithm, a certain type of data is required. For instance, Housing price prediction, the data must include features of each training example. This type of data storage is known as *structured data*. An *unstructured data* however, is like image, text, or audio. No order is required.
+
+## Neuron
+Every neuron in a network is consisted of two back to back sections. After the data is fed to the neuron, it goes through a linear equation. 
+<p align= center>
+$$
+z=\sum_{i=1}^{m}w_{i}x_{j}+b
+$$
+</p>
+
+- z : result of the linear combination
+- $w_i$ : weights
+- $x_j$ : training instances
+- b : bias
+
+
+The dot product of the weights and the training examples is then added to a bias.</br>
+- Every node(neuron) gets a copy of the training set. Now this set can be the whole dataset which is not common, unless the number of data points is very low. Otherwise, we usually use *batches* to train the data. So we divide the whole data set into multiple batches and in each forward propagation, we'll feed one of the batches as input and update the weights.
