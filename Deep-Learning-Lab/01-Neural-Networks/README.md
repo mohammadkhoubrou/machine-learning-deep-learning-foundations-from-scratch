@@ -365,4 +365,184 @@ $$
 (\hat{y}^{(i)}-y^{(i)})
 $$
 
-These derivatives are then used in gradient descent to update the parameters and gradually reduce the cost function.
+These derivatives are then used in gradient descent to update the parameters and gradually reduce the cost function. For a L layer neural network, We use (l) to represent the current layer.
+
+$$
+z^{[l]} = W^{[l]}a^{[l-1]}+b^{[l]}
+$$
+
+$$
+a^{[l]} = g^{[l]}(z^{[l]})
+$$
+
+The output of the previous layer becomes the input of the current layer. For the first layer,
+
+$$
+a^{[0]}=x
+$$
+
+and the prediction layer produces the system's answer to the given input,
+
+$$
+\hat{y}=a^{[L]}
+$$
+
+where (L) is the number of layers.
+
+During back propagation, we start from the cost function and move backward through the layers. We calculate how the cost changes with respect to the activation and the linear combination of each layer.
+
+$$
+dz^{[l]}=\frac{\partial J}{\partial z^{[l]}}
+$$
+
+This value represents how much the cost function changes when the value of (z^{[l]}) changes. For a layer (l), the derivative with respect to the weights is,
+
+$$
+dW^{[l]} =
+\frac{\partial J}{\partial W^{[l]}}
+$$
+
+and the derivative with respect to the bias is,
+
+$$
+db^{[l]} =
+\frac{\partial J}{\partial b^{[l]}}
+$$
+
+The derivative with respect to the activation from the previous layer is,
+
+$$
+da^{[l-1]} =
+\frac{\partial J}{\partial a^{[l-1]}}
+$$
+
+For a single training instance, the back propagation equations can be written as,
+
+$$
+dz^{[l]} =
+da^{[l]}
+\odot
+g'^{[l]}(z^{[l]})
+$$
+
+$$
+dW^{[l]} =
+dz^{[l]}(a^{[l-1]})^T
+$$
+
+$$
+db^{[l]} =
+dz^{[l]}
+$$
+
+$$
+da^{[l-1]} =
+(W^{[l]})^Tdz^{[l]}
+$$
+
+where ($\odot$) represents element-wise multiplication.
+
+For a mini-batch containing (m) training instances, the derivatives are averaged over the training examples,
+
+$$
+dW^{[l]} =
+\frac{1}{m}
+dz^{[l]}(A^{[l-1]})^T
+$$
+
+$$
+db^{[l]} =
+\frac{1}{m}
+\sum_{i=1}^{m}dz^{[l](i)}
+$$
+
+and,
+
+$$
+dA^{[l-1]} =
+(W^{[l]})^Tdz^{[l]}
+$$
+
+The process starts from the output layer and continues backward until the first layer. After calculating these derivatives, gradient descent uses them to update the parameters.
+
+$$
+W^{[l]}
+:=
+W^{[l]} -
+\alpha dW^{[l]}
+$$
+
+$$
+b^{[l]}
+:=
+b^{[l]} -
+\alpha db^{[l]}
+$$
+
+Thus, back propagation calculates the direction in which the cost function changes, while gradient descent uses this information to update the parameters.
+
+Random Initialization
+
+As you might remember from previous sections, the parameters of a neural network are adjusted during training. However, we still need to decide how the parameters should be initialized before the first forward propagation.
+
+One simple approach would be to initialize all weights with zero. This works for some simple models, but it creates a serious problem in a neural network with multiple neurons.
+
+If all neurons in the same layer start with exactly the same weights and bias, they will calculate the same output. During back propagation, they will also receive the same gradients and continue to have the same parameters. Therefore, the neurons cannot learn different features from the data.
+
+This problem is known as the symmetry problem.
+
+For this reason, we usually initialize the weights with small random values instead of setting every weight to zero. The bias can commonly be initialized to zero.
+
+Random initialization allows different neurons to start from different points. As training continues, the gradients can then update their parameters differently, allowing the neurons to learn different representations.
+
+How to Initialize the Parameters
+
+A simple method is to generate random values for the weights from a distribution centered around zero.
+
+For example,
+
+$$
+W^{[l]} \sim \mathcal{N}(0,\sigma^2)
+$$
+
+where ($\mathcal{N}$) represents a normal distribution and ($\sigma$) controls the scale of the initial values.
+
+We can then initialize the bias as,
+
+$$
+b^{[l]}=0
+$$
+
+The values should not be unnecessarily large. Large initial weights can produce very large values of (z), which can cause some activation functions to enter regions where their derivatives are very small. This can make learning slower.
+
+Therefore, the scale of the random initialization should depend on the number of inputs to a neuron.
+
+One common approach for a layer using ReLU activation is He initialization,
+
+$$
+W^{[l]}
+\sim
+\mathcal{N}
+\left(
+0,
+\frac{2}{n^{[l-1]}}
+\right)
+$$
+
+where ($n^{[l-1]}$) is the number of units in the previous layer, also known as the number of input units to the current layer.
+
+Another commonly used initialization method is Xavier or Glorot initialization. For a normal distribution, it can be written as,
+
+$$
+W^{[l]}
+\sim
+\mathcal{N}
+\left(
+0,
+\frac{2}{n^{[l-1]}+n^{[l]}}
+\right)
+$$
+
+The purpose of these initialization methods is not to randomly choose arbitrary values. Instead, they are designed to keep the values of activations and gradients at a reasonable scale as they move through the network.
+
+In practice, we initialize the weights once before training starts. During training, the values are no longer random. They are continuously updated by gradient descent based on the derivatives calculated through back propagation.
