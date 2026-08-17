@@ -451,9 +451,7 @@ dz^{[l]}(A^{[l-1]})^T
 $$
 
 $$
-db^{[l]} =
-\frac{1}{m}
-\sum_{i=1}^{m}dz^{[l](i)}
+db^{[i]} = \frac{1}{m} \sum_{i=1}^{m}dz^{[l] (i)}
 $$
 
 and,
