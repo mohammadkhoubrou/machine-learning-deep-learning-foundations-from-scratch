@@ -134,7 +134,7 @@ $$
 \end{cases}
 $$
 
-Logistic Regression
+## Logistic Regression
 
 It turns out that a single neuron with a sigmoid activation function is mathematically equivalent to logistic regression.
 First, the neuron calculates the linear combination,
@@ -157,7 +157,7 @@ $$
 
 The output $\hat{y}$ represents the estimated probability of (y=1) for the given input $\vec{x}$.
 
-Cost Function
+## Cost Function
 
 In order to evaluate the predictions of our model, we need to compare the output with the labels set for each training instance. For binary classification, we use the logistic regression loss function.
 
@@ -196,7 +196,7 @@ J(w,b) : cost function
 
 The purpose of training the model is to minimize the value of the cost function by adjusting the parameters such as weights and bias.
 
-Gradient Descent
+## Gradient Descent
 
 As you might remember from previous sections, our defined system learns by adjusting the parameters. In fact, we are looking for the best combination of the parameters together. How do we know that the model has learned? When it shows the least error or difference between the target value and model prediction.
 
@@ -221,13 +221,13 @@ b : bias
 J(w,b) : cost function
 ```
 
-Learning Rate
+## Learning Rate
 
 It is a hyper parameter. Hyper parameters are set from the beginning and are not directly learned by the model. The learning rate is a small positive number that determines how big or small the steps should be when updating the parameters.
 
 Two cases emerge while trying to determine the value of a hyper parameter; First, if the value is too small, it may take more iterations to get to the optimal point. On the other hand, if it is too large, it might overshoot and never converge.
 
-Derivative
+## Derivative
 
 Derivatives are used to determine the rate of change of a function. For a simple function such as,
 
@@ -242,3 +242,127 @@ f'(x)=2x
 $$
 
 
+The derivative tells us how quickly the output of the function changes when the input changes. For example, at (x=2),
+
+$$
+f'(2)=4
+$$
+
+This means that the function has a positive slope of (4) at that point.
+
+## Partial Derivatives
+
+The same principal is applied to multi variable functions. We take the derivative of a multi variable function with respect to a certain variable while considering the other variables as constants. Using partial derivatives, we can determine how the slope of the curve changes by altering that variable. For example,
+
+$$
+f(x,y)=x^2+y^2
+$$
+
+The partial derivative with respect to (x) is,
+
+$$
+\frac{\partial f}{\partial x}=2x
+$$
+
+and the partial derivative with respect to (y) is,
+
+$$
+\frac{\partial f}{\partial y}=2y
+$$
+
+## Gradient
+In the case of neural networks, we adjust weights and bias to decrease the cost. Thus, we need to know how the cost function behaves while adjust each of these parameters. Gradient combines the partial derivatives of a function into a vector.
+
+$$
+\nabla f =
+\begin{bmatrix}
+\frac{\partial f}{\partial x}\
+\frac{\partial f}{\partial y}
+\end{bmatrix}
+$$
+
+This vector points to the direction of maximum increase and the negative gradient points to the maximum decrease. Using gradient we can find the direction where the cost function decreases instantly. However, the cost function doesn't directly depend on each parameter.
+
+## Chain Rule
+
+The parameters affect intermediate values, which eventually affect the final prediction and the cost. For example, consider the following sequence,
+
+$$
+x \rightarrow z \rightarrow a \rightarrow J
+$$
+
+where each value depends on the previous value. To determine how a change in (x) affects (J), we use the chain rule.
+
+$$
+\frac{dJ}{dx} =
+\frac{dJ}{da}
+\frac{da}{dz}
+\frac{dz}{dx}
+$$ 
+
+The chain rule allows us to calculate the derivative of a function composed of multiple functions by multiplying the derivatives along the path.
+
+## Computational Graph
+
+A computational graph is a graphical representation of the sequence of operations used to calculate an output. Each node represents a variable or operation, and the connections represent the dependencies between them. For example, a simple neuron can be represented as,
+
+$$
+x,w,b \rightarrow z \rightarrow a \rightarrow J
+$$
+
+where,
+$$
+z = wx+b
+$$
+
+$$
+a = g(z)
+$$
+
+and the cost function uses (a) and (y) to calculate (J).
+
+The computational graph allows us to move forward through the operations to calculate the prediction and the cost. Then, we can move backward through the graph and use the chain rule to calculate the derivatives.
+
+## Backpropagation
+
+The process of calculating derivatives by moving backward through the computational graph is known as backpropagation. It applies the chain rule repeatedly to determine how the cost function changes with respect to each parameter.
+
+For example, if the cost depends on the activation, which depends on (z), which depends on (w), we can calculate,
+
+$$
+\frac{\partial J}{\partial w} =
+\frac{\partial J}{\partial a}
+\frac{\partial a}{\partial z}
+\frac{\partial z}{\partial w}
+$$
+
+Similarly, for the bias,
+
+$$
+\frac{\partial J}{\partial b} =
+\frac{\partial J}{\partial a}
+\frac{\partial a}{\partial z}
+\frac{\partial z}{\partial b}
+$$
+
+These derivatives tell us how much the cost function changes when the corresponding parameter changes. Gradient descent then uses these values to update the weights and bias.
+
+For logistic regression, after applying the chain rule, the derivative of the cost function with respect to a weight can be simplified to,
+
+$$
+\frac{\partial J}{\partial w_j} =
+\frac{1}{m}
+\sum_{i=1}^{m}
+(\hat{y}^{(i)}-y^{(i)})x_j^{(i)}
+$$
+
+and for the bias,
+
+$$
+\frac{\partial J}{\partial b} =
+\frac{1}{m}
+\sum_{i=1}^{m}
+(\hat{y}^{(i)}-y^{(i)})
+$$
+
+These derivatives are then used in gradient descent to update the parameters and gradually reduce the cost function.
