@@ -203,7 +203,8 @@ $$
 Then, the parameters are updated using these values.
 
 $$
-W := W-\alpha V_{dW}
+W := W-
+\alpha V_{dW}
 $$
 
 $$
@@ -237,20 +238,14 @@ $$
 Then, the parameters are updated using,
 
 $$
-W
-:=
-W
--
+W := W -
 \alpha
 \frac{dW}
 {\sqrt{S_{dW}}+\epsilon}
 $$
 
 $$
-b
-:=
-b
--
+b := b -
 \alpha
 \frac{db}
 {\sqrt{S_{db}}+\epsilon}
@@ -301,10 +296,7 @@ $$
 Then, the parameters are updated,
 
 $$
-W
-:=
-W
--
+W := W -
 \alpha
 \frac{\hat{V}*{dW}}
 {\sqrt{\hat{S}*{dW}}+\epsilon}
