@@ -78,3 +78,116 @@ n + 2p -f + 1 = n
 
 p = (f-1)/2
 ```
+
+## Stride
+Stride is when we convolve with more steps instead of one. Size of the output image is calculated through the following formula.
+
+$$z = \lfloor\frac{n+2p-f}{s}\rfloor  + 1$$
+
+- n : input size 
+- s : steps or stride
+- p : padding
+- f : filter
+- $\lfloor \rfloor$ : round down
+- z : output size
+
+## 2D Convolution
+Suppose the input image and filter is,
+
+$$X =
+\begin{bmatrix}
+1 & 2 & 3 & 4 \\
+5 & 6 & 7 & 8 \\
+9 & 10 & 11 & 12 \\
+13 & 14 & 15 & 16
+\end{bmatrix}
+$$
+
+$$K =
+\begin{bmatrix}
+1 & 0 & -1 \\
+1 & 0 & -1 \\
+1 & 0 & -1
+\end{bmatrix}
+$$
+
+Specify the first position and perform an element-wise multiplication, 
+
+$$1st pos =
+\begin{bmatrix}
+1 & 2 & 3 \\
+5 & 6 & 7 \\
+9 & 10 & 11
+\end{bmatrix}
+$$
+
+$$X \circ K = 
+\begin{bmatrix}
+1 & 0 & -3 \\
+5 & 0 & -7 \\
+9 & 0 & -11
+\end{bmatrix}$$ 
+
+Then, sum over the elements, to calculate the value of $z_{0,0}$.
+
+1 - 3 + 5 - 7 + 9 - 11 = -6
+
+Now move the kernel one step to the right on the image and perform the same calculations. Usually a real convolution has more than one filter which allows the system to learn more complicated patterns and detect various features. Each filter over an image of any size and channel, produces a single output. Therefore, for a system with n filters at a layer, we have n results that we can stack together and pass on to the next layer. For example,
+X : 24 x 24
+5 filters of size 4 x 4, output is 21 x 21 x 5
+
+Next, we apply the activation function to the result of linear combination. Consider *ReLu* function applied over the output of the previous example,
+
+$$ReLu(z) = max(0,z)$$
+
+$$\begin{bmatrix}
+1 & 0 & -3 \\
+5 & 0 & -7 \\
+9 & 0 & -11
+\end{bmatrix} \longrightarrow \begin{bmatrix}
+1 & 0 & 0 \\
+5 & 0 & 0 \\
+9 & 0 & 0
+\end{bmatrix}$$
+
+## Pooling
+Pooling reduces the spatial dimensions. There aren't any parameters in pooling. One of the most common types of pooling is *max pooling* where we take the largest value in each convolution window. The output size is calculated similar to the former method. For instance in a pooling window of size 2 x 2 we have,
+
+$$
+\begin{bmatrix}
+1 & 3 \\
+2 & 9
+\end{bmatrix}
+\longrightarrow \begin{bmatrix}
+9
+\end{bmatrix}
+$$
+
+Another form of pooling is *average pooling*. To perform an average pooling, in each convolution window, we take the average of the present elements.
+
+
+$$
+\begin{bmatrix}
+1 & 3 \\
+2 & 9
+\end{bmatrix}
+\longrightarrow \begin{bmatrix}
+3.75
+\end{bmatrix}
+$$
+
+## Flatten
+If we decide to put a fully connected layer in our architecture, we must flatten the input matrix. Flattening is simply changing the dimensions of the matrix and turning it into a vector. 
+
+$$
+\begin{bmatrix}
+1 & 3 \\
+2 & 9
+\end{bmatrix}
+\longrightarrow \begin{bmatrix}
+1 & 3 & 2 & 9
+\end{bmatrix}^{T}
+$$
+
+$$\mathbb{R}^{2x2} \longrightarrow \mathbb{R}^{4}$$
+Now we can simply pass it as an input to a regular neural network.
