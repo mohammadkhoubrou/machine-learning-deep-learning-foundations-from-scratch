@@ -191,3 +191,58 @@ $$
 
 $$\mathbb{R}^{2x2} \longrightarrow \mathbb{R}^{4}$$
 Now we can simply pass it as an input to a regular neural network.
+
+## Softmax
+After calculating the linear combination of the regular neural network, we will compute the probability of each output using a *softmax* layer. A clear example of this is the hand sign recognition. Imagine a model trained on a dataset of hand signs representing numbers through 0 to 10.
+For each input image the model returns a vector showing the probability of the image belonging to each class.
+
+$$\hat{y}_i = \frac{e^{z_i}}{\sum_{j} e^{z_j}}$$
+
+## Cross-Entropy Cost
+We'll use *cross-entropy* as our loss function, then expand it on the whole batch to calculate the cost. As discussed, the network returns a vector of probabilities for each class. Therefore, our labels is a vector with zeros for all the elements except for the true class. 
+
+$$y =
+[1, 0, 0]//
+\hat{y} =
+[0.665, 0.245, 0.090]
+$$
+
+- Notice the sum of the predictions adds up to 1.
+
+$$L = 
+-\sum_{i} y_i log(\hat{y}_i)
+$$
+
+Since only the true class is one, we get the error for true class prediction. The most important intuition you should take is that the more probability the network assigns to a class, the smaller the loss becomes.
+
+## Forward pass
+In this section we'll attempt to construct the network by putting together the elements of *forward pass*. A typical CNN is consisted of the following steps.
+
+$$ input(image) \rightarrow Conv2D \rightarrow ReLu \rightarrow MaxPool \rightarrow Flatten \rightarrow Dense \rightarrow SoftMax \rightarrow Output(Prediction)$$
+
+# Backpropagation
+Using forward propagation, we make predictions based on the given input values. But in order to make predictions with lower cost, we use *backpropagation* to adjust the parameters and return the ones that produce the desired outputs. As discussed in the previous sections, we need to determine
+
+$$\frac{\partial L}{\partial W}, \frac{\partial L}{\partial K}, \frac{\partial L}{\partial b}$$
+
+Then, using gradient descent, we'll update the parameters untill we find the most suitable parameters for the task in hand. To do so, we apply the principal of chain rule and start from the last layer which was the softmax and cross-entropy.
+
+$$\frac{\partial L}{\partial z} = \hat{y} - y$$
+
+- z : dense layer before softmax
+- $\hat{y}$ : prediction
+- y : labels
+
+$$ z = Wx + b$$
+$$\frac{\partial L}{\partial W} = dz x^{T}$$
+$$\frac{\partial L}{\partial b} = dz$$
+Also, $\frac{\partial L}{\partial x}$ should be calculated because it is the output of the previous layer.
+$$\frac{\partial L}{\partial x} = W^{T}dz$$
+
+- suppose dz is $\frac{\partial L}{\partial z}$.
+
+The flattened layer is simply reshape it back to the previous shape. The back propagation for ReLu look like,
+
+$$\frac{\partial A}{\partial z} = \begin{cases} 1 & \text{if } z > 0 \\\\ 0 & \text{if } z \le 0 \end{cases}$$
+
+Next, convolution backpropagation.  
