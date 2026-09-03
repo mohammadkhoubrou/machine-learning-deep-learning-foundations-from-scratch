@@ -245,4 +245,23 @@ The flattened layer is simply reshape it back to the previous shape. The back pr
 
 $$\frac{\partial A}{\partial z} = \begin{cases} 1 & \text{if } z > 0 \\\\ 0 & \text{if } z \le 0 \end{cases}$$
 
-Next, convolution backpropagation.  
+Next, convolution backpropagation. This section is perhaps the most mathematical part of the backpropagation. Suppose we have calculated  $\frac{\partial L}{\partial Z_{i,j}}$.
+
+$$Z_{i,j} = \sum_{m,n} X_{i+m, j+n} K_{m,n}$$
+$$\frac{\partial L}{\partial K_{m,n}} = \sum_{i,j}dZ_{i,j} X_{i+m, j+n}$$
+$$\frac{\partial L}{\partial X_{i+m, j+n}} = dZ_{i,j} K_{m,n}$$
+$$\frac{\partial L}{\partial b} = \sum_{i,j} dZ_{i,j}$$
+
+Then, we will assemble the elements of the backpropagation and the backward route imitates the following stream.
+
+Forward pass:
+
+$$ X \rightarrow Z_c \rightarrow A \rightarrow P \rightarrow x \rightarrow Z_d \rightarrow \hat{y} \rightarrow L $$
+
+Backward pass:
+
+$$ L \rightarrow Z_d \rightarrow x \rightarrow P \rightarrow A \rightarrow Z_c \rightarrow K$$
+
+## Gradient Descent
+Finally, we will compute the new value for the parameters using gradient descent.
+$$\theta_{new} = \theta_{old} - \alpha \frac{\partial L}{\partial \theta}$$
